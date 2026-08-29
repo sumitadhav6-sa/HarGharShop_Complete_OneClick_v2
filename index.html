@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarGharShop - Online Shopping Site for Mobiles, Fashion, Electronics & More</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- TOP HEADER NOTIFICATION -->
+    <div class="top-strip">
+        <p>🚚 Free & Fast Delivery on orders above ₹499 across India | <strong>Created by Sumit Adhav</strong></p>
+        <div class="top-strip-right">
+            <span><i class="fa-solid fa-headset"></i> 24x7 Help</span>
+            <span><i class="fa-solid fa-shield-halved"></i> 100% Secure Checkout</span>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="main-navbar">
+        <div class="nav-container">
+            <!-- Brand Logo -->
+            <div class="brand-logo" onclick="filterCategory('all')">
+                <h1>HarGhar<span>Shop</span></h1>
+                <span class="sub-logo">Explore <em>Plus</em></span>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search for products, brands and more..." oninput="searchProducts()">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="nav-right">
+                <button class="nav-btn login-btn"><i class="fa-regular fa-user"></i> Sign In</button>
+                <div class="nav-btn wishlist-icon-btn" onclick="showWishlistAlert()">
+                    <i class="fa-regular fa-heart"></i>
+                    <span>Wishlist</span>
+                </div>
+                <div class="nav-btn cart-button" onclick="toggleCart()">
+                    <div class="cart-icon-wrapper">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="cartCountBadge" class="cart-badge">0</span>
+                    </div>
+                    <span>Cart</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CATEGORIES STRIP -->
+    <nav class="categories-bar">
+        <div class="cat-wrapper">
+            <button class="cat-pill active" onclick="filterCategory('all', this)"><i class="fa-solid fa-border-all"></i> All Products</button>
+            <button class="cat-pill" onclick="filterCategory('mobiles', this)"><i class="fa-solid fa-mobile-screen-button"></i> Mobiles</button>
+            <button class="cat-pill" onclick="filterCategory('electronics', this)"><i class="fa-solid fa-laptop"></i> Electronics</button>
+            <button class="cat-pill" onclick="filterCategory('fashion', this)"><i class="fa-solid fa-shirt"></i> Fashion</button>
+            <button class="cat-pill" onclick="filterCategory('footwear', this)"><i class="fa-solid fa-shoe-prints"></i> Footwear</button>
+            <button class="cat-pill" onclick="filterCategory('home', this)"><i class="fa-solid fa-house"></i> Home & Kitchen</button>
+            <button class="cat-pill" onclick="filterCategory('beauty', this)"><i class="fa-solid fa-wand-magic-sparkles"></i> Beauty</button>
+            <button class="cat-pill" onclick="filterCategory('groceries', this)"><i class="fa-solid fa-basket-shopping"></i> Groceries</button>
+        </div>
+    </nav>
+
+    <!-- HERO PROMOTIONAL BANNER -->
+    <section class="hero-slider">
+        <div class="hero-slide-content">
+            <span class="sale-badge">MEGA SAVINGS FESTIVAL</span>
+            <h2>Up to 70% Off on Top Brands</h2>
+            <p>Grab lightning deals on Electronics, Mobiles, and Trendy Fashion right now.</p>
+            <div class="hero-btns">
+                <a href="#productsCatalog" class="cta-btn primary">Shop Now <i class="fa-solid fa-arrow-right"></i></a>
+                <span class="creator-stamp"><i class="fa-solid fa-award"></i> Built with ❤️ by <strong>Sumit Adhav</strong></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST BADGES -->
+    <section class="trust-strip">
+        <div class="trust-item"><i class="fa-solid fa-truck-fast"></i> <div><strong>Fast Delivery</strong><span>Within 2-3 Days</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-rotate-left"></i> <div><strong>7-Days Return</strong><span>No Questions Asked</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-certificate"></i> <div><strong>100% Genuine</strong><span>Verified Products</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-wallet"></i> <div><strong>Cash On Delivery</strong><span>Pay on Arrival</span></div></div>
+    </section>
+
+    <!-- MAIN PRODUCT CATALOG -->
+    <main class="catalog-container" id="productsCatalog">
+        <div class="catalog-header">
+            <div>
+                <h2 id="sectionTitle">All Products</h2>
+                <p id="productCountInfo">Showing all verified in-stock items</p>
+            </div>
+            <!-- Sort dropdown -->
+            <div class="sort-wrapper">
+                <label for="sortSelect"><i class="fa-solid fa-arrow-down-short-wide"></i> Sort by:</label>
+                <select id="sortSelect" onchange="sortProducts()">
+                    <option value="featured">Featured</option>
+                    <option value="low-to-high">Price: Low to High</option>
+                    <option value="high-to-low">Price: High to Low</option>
+                    <option value="rating">Customer Rating</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Cards Grid -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Dynamically injected via script.js -->
+        </div>
+    </main>
+
+    <!-- CART SIDE DRAWER -->
+    <div class="cart-drawer-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> My Shopping Cart (<span id="cartCountTitle">0</span>)</h3>
+            <button class="close-drawer" onclick="toggleCart()">&times;</button>
+        </div>
+
+        <div class="cart-drawer-body" id="cartItemList">
+            <!-- Dynamic Cart Items -->
+        </div>
+
+        <div class="cart-drawer-footer">
+            <div class="bill-row">
+                <span>Subtotal</span>
+                <span>₹<span id="subTotal">0</span></span>
+            </div>
+            <div class="bill-row">
+                <span>Delivery Charge</span>
+                <span class="free-tag">FREE</span>
+            </div>
+            <div class="bill-row grand-total">
+                <span>Total Amount:</span>
+                <span class="price-val">₹<span id="grandTotal">0</span></span>
+            </div>
+            <button class="place-order-btn" onclick="openCheckoutModal()">
+                Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-shield-halved"></i> HarGharShop Secure Checkout</h3>
+                <button class="modal-close" onclick="closeCheckoutModal()">&times;</button>
+            </div>
+            <form id="checkoutForm" onsubmit="handlePlaceOrder(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                </div>
+                <div class="form-group">
+                    <label>Delivery Address</label>
+                    <textarea rows="2" placeholder="House No., Building, Street, Area, Pincode" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="radio-options">
+                        <label class="radio-label">
+                            <input type="radio" name="payment" value="cod" checked> Cash on Delivery (COD)
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="payment" value="upi"> UPI / GPay / PhonePe / Card
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-order-summary">
+                    <span>Payable Amount:</span>
+                    <strong id="modalPayable">₹0</strong>
+                </div>
+                <button type="submit" class="confirm-order-btn">Confirm & Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="app-footer">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <h2>HarGhar<span>Shop</span></h2>
+                <p>India's favourite online marketplace bringing premium lifestyle, tech, and essentials straight to every household doorstep.</p>
+                <p class="creator-highlight"><i class="fa-solid fa-user-tie"></i> <strong>Founder & Developer:</strong> Sumit Adhav</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Categories</h4>
+                <a href="#productsCatalog" onclick="filterCategory('mobiles')">Mobile Phones</a>
+                <a href="#productsCatalog" onclick="filterCategory('electronics')">Laptops & Audio</a>
+                <a href="#productsCatalog" onclick="filterCategory('fashion')">Men & Women Fashion</a>
+                <a href="#productsCatalog" onclick="filterCategory('home')">Kitchen Appliances</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Customer Care</h4>
+                <a href="#">Track Order</a>
+                <a href="#">Returns & Replacements</a>
+                <a href="#">Shipping Rates & Policies</a>
+                <a href="#">Help Center</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Secure Payments</h4>
+                <p><i class="fa-brands fa-cc-visa fa-2x"></i> <i class="fa-brands fa-cc-mastercard fa-2x"></i> <i class="fa-brands fa-google-pay fa-2x"></i> <i class="fa-solid fa-money-bill-wave fa-2x"></i></p>
+                <p class="safe-text"><i class="fa-solid fa-lock"></i> 256-Bit SSL Encrypted Safe Checkout</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 <strong>HarGharShop.com</strong> | Designed & Developed exclusively by <strong>Sumit Adhav</strong>.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
